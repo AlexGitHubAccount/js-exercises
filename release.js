@@ -2,15 +2,18 @@ const fs = require("fs").promises;
 const path = require("path");
 
 const exercisesPath = path.join(__dirname, "/exercises/");
+const content = "module.exports = ";
 
 main();
 
 async function main() {
 	const indexFilePaths = await getIndexFilePaths(exercisesPath);
 
-	for (const indexFilePath of indexFilePaths) {
-		console.log(indexFilePath);
-	}
+	await Promise.all(
+		indexFilePaths.map((indexFilePath) => fs.writeFile(indexFilePath, content))
+	);
+
+	await fs.unlink(path.join(__dirname, "release.js"));
 }
 
 async function getIndexFilePaths(root = __dirname) {
