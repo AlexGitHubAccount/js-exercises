@@ -32,6 +32,7 @@ const graph = [
 	[false, true, true, false],
 ];
 
+// Проследить за правильностью пути можно по изображению выше.
 getShortPath(0, 0, graph); // []
 getShortPath(0, 100, graph); // false
 getShortPath(0, 1, graph); // [0, 1]
